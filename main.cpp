@@ -56,12 +56,12 @@ public:
 
 
 				hProc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwPID);
-				delete procNameChar;
+				delete[] procNameChar;
 				return true;
 			}
 		while (Process32Next(hPID, &ProcEntry));
 
-		delete procNameChar;
+		delete[] procNameChar;
 		std::cout << "Process Not Found: " << procName << std::endl;;
 		Sleep(500);
 		return false;
@@ -115,11 +115,11 @@ public:
 			{
 				CloseHandle(hModule);
 				return (DWORD)mEntry.modBaseAddr;
-				delete procNameChar;
+				delete[] procNameChar;
 			}
 		while (Module32Next(hModule, &mEntry));
 
-		delete procNameChar;
+		delete[] procNameChar;
 		std::cout << "Process Platform Invalid: " << modName << std::endl;
 		return 0;
 	}
